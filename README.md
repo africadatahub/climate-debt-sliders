@@ -1,6 +1,6 @@
-# React Starter
+# Climate Sliders
 
-A basic React Starter project with Tailwind CSS and Parcel.
+Adjust African consumption and energy mix and see resulting CO2 emissions.
 
 ## Install
 
