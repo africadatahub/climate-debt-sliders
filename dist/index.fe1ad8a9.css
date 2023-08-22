@@ -13631,12 +13631,13 @@ textarea.form-control-lg {
 }
 
 .energymix:before {
-  opacity: .1;
+  opacity: .08;
   background-image: url("energymix.523831ce.jpg");
+  background-position: top;
 }
 
 .emissions:before {
-  opacity: .2;
+  opacity: .15;
   background-image: url("emissions.fbee1a14.jpg");
 }
 
