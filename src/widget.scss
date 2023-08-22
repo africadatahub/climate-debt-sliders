@@ -1,0 +1,116 @@
+.widget {
+    max-width: 90rem;
+    height: 90vh;
+    max-height: 90vh;
+    background: #f1f1f1;
+    border-radius: 5rem;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin: 5vh auto;
+}
+
+
+.widget * {
+    font-family: 'Bebas Neue', sans-serif;
+    box-sizing: border-box;
+}
+
+      
+.slider-container {
+    border-radius: 30px;
+    height: auto;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.rc-slider {
+    height: 30px !important;
+}
+
+.rc-slider-step {
+    top: 40px;
+}
+
+.rc-slider-mark {
+    top: 50px;
+}
+
+.rc-slider-mark-text {
+    white-space: nowrap !important;
+    font-size: 18px;
+    // font-family: 'Arial', sans-serif;
+}
+
+
+.iconCircle {
+    border-radius: 50%;
+    width: 4em;
+    height: 4em;
+    background-color: rgba(252, 195, 0);
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+    svg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.energymix-iconCircle {
+    background-color: rgb(96, 206, 119);
+}
+
+.emissions-iconCircle {
+    background-color: rgb(181, 190, 189);
+}
+
+.label {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    font-size: 0.8em;
+    margin-top: 5px;
+}
+
+.annotation {
+    text-align: right;
+    width: 100%;
+
+    h2 {
+        font-size: 1.5em;
+        margin: 0;
+        // background: rgba(252, 195, 0);
+        background: #333;
+        color: #fff;
+        display: inline-block;
+        padding: 0.05em 0.5em;
+        transform: rotate(2deg);
+        position: relative;
+        top: -0.3em;
+        box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+        border-radius: 3PX;
+    }
+
+    p {
+        font-family: 'Arial', sans-serif;
+    }
+}
+
+.emissions-annotation h2 {
+    // background: rgb(181, 190, 189);
+    background: #333;
+    color: #fff;
+}
+
+.energymix-annotation h2 {
+    // background: rgb(96, 206, 119);
+    background: #333;
+    color: #fff;
+}
+
+.caption {
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.6em;
+}
