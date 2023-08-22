@@ -13,6 +13,7 @@
     "bootstrap": "^5.3.1",
     "d3": "^7.8.5",
     "papaparse": "^5.4.1",
+    "parcel": "2.8.3",
     "rc-slider": "^10.2.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.8.0",
@@ -22,7 +23,6 @@
   "devDependencies": {
     "@parcel/transformer-raw": "^2.9.3",
     "@parcel/transformer-sass": "2.8.3",
-    "parcel": "^2.9.3",
     "parcel-transformer-csv": "^0.0.3",
     "process": "^0.11.10"
   }
