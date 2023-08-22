@@ -273,7 +273,7 @@ export function Widget() {
                     </Col>
                 </Row>
             </div>
-            <div style={{backgroundColor: 'rgb(153, 220, 167,' + (energyMix/100 - 0.1) + ')'}} className="pt-2 px-5 pb-2 energymix">
+            <div style={{backgroundColor: 'rgb(128, 202, 239,' + (energyMix/100 - 0.1) + ')'}} className="pt-2 px-5 pb-2 energymix">
                 <Row className="py-3 consumption-text">
                     <Col xs="auto">
                         <Row>
