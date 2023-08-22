@@ -13609,4 +13609,35 @@ textarea.form-control-lg {
   font-size: .6em;
 }
 
+.consumption, .energymix, .emissions {
+  position: relative;
+}
+
+.consumption:before, .energymix:before, .emissions:before {
+  content: " ";
+  mix-blend-mode: multiply;
+  opacity: .05;
+  pointer-events: none;
+  background-image: url("consumption.2a72c1bb.jpg");
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.energymix:before {
+  opacity: .1;
+  background-image: url("energymix.523831ce.jpg");
+}
+
+.emissions:before {
+  opacity: .2;
+  background-image: url("emissions.fbee1a14.jpg");
+}
+
 /*# sourceMappingURL=index.fe1ad8a9.css.map */

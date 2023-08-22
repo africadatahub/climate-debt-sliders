@@ -114,3 +114,34 @@
     font-family: 'Arial', sans-serif;
     font-size: 0.6em;
 }
+
+.consumption, .energymix, .emissions {
+    position: relative;
+}
+
+.consumption:before, .energymix:before, .emissions:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('consumption.jpg');
+    background-size: cover;
+    background-position: center center;
+    mix-blend-mode: multiply;
+    opacity: 0.05;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.energymix:before {
+    background-image: url('energymix.jpg');
+    opacity: 0.1;
+}
+
+.emissions:before {
+    background-image: url('emissions.jpg');
+    opacity: 0.2;
+}

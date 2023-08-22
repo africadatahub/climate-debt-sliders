@@ -209,7 +209,7 @@ export function Widget() {
 
     return (
         <div className="widget">
-            <div style={{backgroundColor: 'rgb(248, 211, 84, ' + (consumptionPerCapitaPercent/100 - 0.1) + ')'}} className="pt-4 px-5 pb-2">
+            <div style={{backgroundColor: 'rgb(248, 211, 84, ' + (consumptionPerCapitaPercent/100 - 0.1) + ')'}} className="pt-4 px-5 pb-2 consumption">
                 <Row className="consumption-text">
                     <Col md="auto">
                         <Row>
@@ -273,7 +273,7 @@ export function Widget() {
                     </Col>
                 </Row>
             </div>
-            <div style={{backgroundColor: 'rgb(153, 220, 167,' + (energyMix/100 - 0.1) + ')'}} className="pt-2 px-5 pb-2">
+            <div style={{backgroundColor: 'rgb(153, 220, 167,' + (energyMix/100 - 0.1) + ')'}} className="pt-2 px-5 pb-2 energymix">
                 <Row className="py-3 consumption-text">
                     <Col xs="auto">
                         <Row>
@@ -341,7 +341,7 @@ export function Widget() {
                     </Col>
                 </Row>
             </div>
-            <div style={{backgroundColor: 'rgb(204, 210, 209,' + (emissionsPercent/100) + ')'}} className="pt-2 px-5 pb-2">
+            <div style={{backgroundColor: 'rgb(204, 210, 209,' + (emissionsPercent/100) + ')'}} className="pt-2 px-5 pb-2 emissions">
                 <Row className="py-3 emission-text">
                     <Col xs="auto">
                         <Row>
@@ -394,7 +394,7 @@ export function Widget() {
                 </Row>
                 <Row>
                     <Col>
-                        <div className="caption">((consumptionPerCapita*1.65)/100)*(100-energyMix) * (fossilFuelMakeup/1000000) ({consumptionPerCapitaPercent}))</div>
+                        <div className="caption">((consumptionPerCapita*1.65)/100)*(100-energyMix) * (fossilFuelMakeup/1000000)</div>
                     </Col>
                 </Row>
             </div>
