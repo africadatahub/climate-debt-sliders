@@ -69,13 +69,13 @@ export function Widget() {
                     text: "African average consumption is 560 kwh per capita per year. This is the same as the US in 1950."
                 },
                 {
-                    value_start: 24.6,
-                    value_end: 25.6,
+                    value_start: 25.6,
+                    value_end: 26.6,
                     title: "World Average",
                     text: "World average consumption is 3265 kwh per capita per year. This is the same as the US in 1970."
                 },
                 {
-                    value_start: 70,
+                    value_start: 60.99,
                     value_end: 71,
                     title: "OECD Average",
                     text: "OECD average consumption is 7773 kwh per capita per year. This is the same as the US in 2000."
