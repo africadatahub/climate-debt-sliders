@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Icon from '@mdi/react';
-import { mdiPowerPlug, mdiAccountGroup, mdiWindPower, mdiBarrel, mdiSmog, mdiGasCylinder, mdiPineTreeFire } from '@mdi/js';
+import { mdiPowerPlug, mdiAccountGroup, mdiWindPower, mdiBarrel, mdiSmog, mdiGasCylinder, mdiPineTreeFire, mdiMoleculeCo2 } from '@mdi/js';
 
 import './app.scss';
 import './widget.scss';
@@ -353,6 +353,19 @@ export function Widget() {
                             <Col xs="auto">
                                 <div className="label">CO2 Emissions</div>
                                 <h2>{emissions.toLocaleString()} Gt</h2>
+                            </Col>
+                        </Row>
+                    </Col>
+                    <Col>
+                        <Row>
+                            <Col xs="auto">
+                                <div className="iconCircle emissions-iconCircle">
+                                    <Icon path={mdiMoleculeCo2} size={1.5} />
+                                </div>
+                            </Col>
+                            <Col xs="auto">
+                                <div className="label">% increase in Global Emissions</div>
+                                <h2>{(emissions/(36.8 - emissions) * 100).toLocaleString()} %</h2>
                             </Col>
                         </Row>
                     </Col>

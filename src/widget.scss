@@ -119,30 +119,30 @@
     position: relative;
 }
 
-.consumption:before, .energymix:before, .emissions:before {
-    content: ' ';
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('consumption.jpg');
-    background-size: cover;
-    background-position: center center;
-    mix-blend-mode: multiply;
-    opacity: 0.05;
-    overflow: hidden;
-    pointer-events: none;
-}
+// .consumption:before, .energymix:before, .emissions:before {
+//     content: ' ';
+//     display: block;
+//     position: absolute;
+//     left: 0;
+//     top: 0;
+//     width: 100%;
+//     height: 100%;
+//     background-image: url('consumption.jpg');
+//     background-size: cover;
+//     background-position: center center;
+//     mix-blend-mode: multiply;
+//     opacity: 0.05;
+//     overflow: hidden;
+//     pointer-events: none;
+// }
 
-.energymix:before {
-    background-image: url('energymix.jpg');
-    opacity: 0.08;
-    background-position: top center;
-}
+// .energymix:before {
+//     background-image: url('energymix.jpg');
+//     opacity: 0.08;
+//     background-position: top center;
+// }
 
-.emissions:before {
-    background-image: url('emissions.jpg');
-    opacity: 0.15;
-}
+// .emissions:before {
+//     background-image: url('emissions.jpg');
+//     opacity: 0.15;
+// }
