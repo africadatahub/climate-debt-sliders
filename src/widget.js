@@ -102,12 +102,7 @@ export function Widget() {
                 }
             ],
             emissions: [
-                {
-                    value_start: 0,
-                    value_end: 10,
-                    title: "Current Emissions",
-                    text: "At this rate, it is estimated that temperature will increase by 1.5 degrees by 2030."
-                },
+                
             ]
         }
 
@@ -186,17 +181,17 @@ export function Widget() {
         });
     }, []);
 
-    changeConsumption = (value) => {
+    let changeConsumption = (value) => {
         let cpc = Math.round(consumptionData[consumptionData.length - 1].consumption_per_capita_kwh * (value/100));
         setConsumptionPerCapita(cpc);
         setConsumptionPerCapitaPercent(value);
     }
 
-    changeEnergyMix = (value) => {
+    let changeEnergyMix = (value) => {
         setEnergyMix(value);
     }
 
-    changeFossilFuelMakeup = (value) => {
+    let changeFossilFuelMakeup = (value) => {
         setFossilFuelMakeup(value);
     }
 
