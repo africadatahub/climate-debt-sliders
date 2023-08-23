@@ -365,7 +365,7 @@ export function Widget() {
                             </Col>
                             <Col xs="auto">
                                 <div className="label">% increase in Global Emissions</div>
-                                <h2>{(emissions/(36.8 - emissions) * 100).toLocaleString()} %</h2>
+                                <h2>{(emissions/(36.8-1.263) * 100).toLocaleString()} %</h2>
                             </Col>
                         </Row>
                     </Col>
