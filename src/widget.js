@@ -14,7 +14,7 @@ import './widget.scss';
 export function Widget() {
 
     
-
+    const [showIntro, setShowIntro] = React.useState(true);
     const [consumptionData, setConsumptionData] = React.useState([
         {
             consumption_level: ' ',
@@ -147,301 +147,318 @@ export function Widget() {
     }, [consumptionPerCapita, energyMix, fossilFuelMakeup]);
 
     return (
-        <div className="widget">
+        
+        <>
 
-            {/***** CONSUMPTION *****/}
+            {/***** INTRO *****/}
 
-            <div className="consumption slider-wrapper">
-                <div className="title-row">
-                    <Row>
-                        <Col>
-                            <h1>Energy Consumption<div className={lockedSlider == 'consumption' ? 'lock-btn locked d-none d-md-inline-block' : 'lock-btn d-none d-md-inline-block'} onClick={() => setLockedSlider('consumption')}></div></h1>
-                        </Col>
-                        <Col className="d-none d-md-block" md={6} lg={8}>
-                            <div className="annotation-small">
-                                Annual per capita value calculated based on a projected African population of 1.6 billion
-                            </div>
-                        </Col>
-                        <Col className="d-md-none">
-                            <Row className="g-0">
-                                <Col>
-                                    <h2 className="slider-value bg-consumption">{consumptionPerCapita.toLocaleString()} kwh</h2>
-                                </Col>
-                                <Col xs={4}>
-                                    <h3 className="slider-value-extra">2x</h3>
-                                </Col>
-                            </Row>
-                        </Col>
-                    </Row>
-                </div>
-
-                <div className="tooltip-row d-none d-md-block">
-                    <div class="slider-tooltip">
-                        Most optimistic estimate
+            <div className={showIntro ? 'widget d-block' : 'widget d-none'}>
+                <div className="intro-wrapper">
+                    <div className="intro-content">
+                        <h1>Energy Demand in Africa</h1>
                     </div>
+                    <div className="intro-btn" onClick={() => setShowIntro(false)}>Start</div>
                 </div>
+            </div>
 
-                <div className="slider-row">
-                    <Row>
-                        <Col>
-                            <div className="slider-container">
-                                <Slider
-                                    min={0}
-                                    startPoint={0}
-                                    marks={consumptionScale}
-                                    step={1}
-                                    onChange={changeConsumption}
-                                    value={consumptionPerCapitaPercent}
-                                    disabled={lockedSlider == 'consumption'}
-                                />
-                            </div>
-                        </Col>
-                        <Col xs="auto">
-                            <div className={lockedSlider == 'consumption' ? 'lock-btn locked d-md-none' : 'lock-btn d-md-none'} onClick={() => setLockedSlider('consumption')}></div>
-                        </Col>
-                        <Col md={2} className="ps-3 d-none d-md-block">
-                            <h2 className="slider-value bg-consumption">{consumptionPerCapita.toLocaleString()} kwh</h2>
-                            <h3 className="slider-value-extra">2x Current</h3>
-                        </Col>
-                    </Row>
-                </div>
+            <div className={showIntro ? 'widget d-none' : 'widget d-block'}>
 
-                <div className="tooltip-row d-md-none">
-                    <div class="slider-tooltip">
-                        Most optimistic estimate
+                {/***** CONSUMPTION *****/}
+
+                <div className="consumption slider-wrapper">
+                    <div className="title-row">
+                        <Row>
+                            <Col>
+                                <h1>Energy Consumption<div className={lockedSlider == 'consumption' ? 'lock-btn locked d-none d-md-inline-block' : 'lock-btn d-none d-md-inline-block'} onClick={() => setLockedSlider('consumption')}></div></h1>
+                            </Col>
+                            <Col className="d-none d-md-block" md={6} lg={8}>
+                                <div className="annotation-small">
+                                    Annual per capita value calculated based on a projected African population of 1.6 billion
+                                </div>
+                            </Col>
+                            <Col className="d-md-none">
+                                <Row className="g-0">
+                                    <Col>
+                                        <h2 className="slider-value bg-consumption">{consumptionPerCapita.toLocaleString()} kwh</h2>
+                                    </Col>
+                                    <Col xs={4}>
+                                        <h3 className="slider-value-extra">2x</h3>
+                                    </Col>
+                                </Row>
+                            </Col>
+                        </Row>
                     </div>
+
+                    <div className="tooltip-row d-none d-md-block">
+                        <div class="slider-tooltip">
+                            Most optimistic estimate
+                        </div>
+                    </div>
+
+                    <div className="slider-row">
+                        <Row>
+                            <Col>
+                                <div className="slider-container">
+                                    <Slider
+                                        min={0}
+                                        startPoint={0}
+                                        marks={consumptionScale}
+                                        step={1}
+                                        onChange={changeConsumption}
+                                        value={consumptionPerCapitaPercent}
+                                        disabled={lockedSlider == 'consumption'}
+                                    />
+                                </div>
+                            </Col>
+                            <Col xs="auto">
+                                <div className={lockedSlider == 'consumption' ? 'lock-btn locked d-md-none' : 'lock-btn d-md-none'} onClick={() => setLockedSlider('consumption')}></div>
+                            </Col>
+                            <Col md={2} className="ps-3 d-none d-md-block">
+                                <h2 className="slider-value bg-consumption">{consumptionPerCapita.toLocaleString()} kwh</h2>
+                                <h3 className="slider-value-extra">2x Current</h3>
+                            </Col>
+                        </Row>
+                    </div>
+
+                    <div className="tooltip-row d-md-none">
+                        <div class="slider-tooltip">
+                            Most optimistic estimate
+                        </div>
+                    </div>
+                    
+                    <div className="annotation-row">
+                        <Row>
+                            <Col className="d-flex align-items-center">
+                                <div className="annotation-wrapper">
+                                    {
+                                        annotations.consumption.map((item, index) => {
+                                            if (consumptionPerCapitaPercent >= item.value_start && consumptionPerCapitaPercent <= item.value_end) {
+                                                return (
+                                                    <Row className="annotation">
+                                                        <Col xs={12} md="auto">
+                                                            <h2 className="text-consumption">{item.title}</h2>
+                                                        </Col>
+                                                        <Col>
+                                                            <p>{item.text}</p>
+                                                        </Col>
+                                                    </Row>
+                                                )
+                                            }
+                                        })
+                                    }
+                                </div>
+                            </Col>
+                        </Row>
+                    </div>
+
                 </div>
+
+                {/***** ENERGY MIX *****/}
                 
-                <div className="annotation-row">
-                    <Row>
-                        <Col className="d-flex align-items-center">
-                            <div className="annotation-wrapper">
-                                {
-                                    annotations.consumption.map((item, index) => {
-                                        if (consumptionPerCapitaPercent >= item.value_start && consumptionPerCapitaPercent <= item.value_end) {
-                                            return (
-                                                <Row className="annotation">
-                                                    <Col xs={12} md="auto">
-                                                        <h2 className="text-consumption">{item.title}</h2>
-                                                    </Col>
-                                                    <Col>
-                                                        <p>{item.text}</p>
-                                                    </Col>
-                                                </Row>
-                                            )
-                                        }
-                                    })
-                                }
-                            </div>
-                        </Col>
-                    </Row>
+                <div className="energymix slider-wrapper">
+                    <div className="title-row">
+                        <Row>
+                            <Col>
+                                <h1>Renewables <span className="d-none d-md-inline">in Energy </span>Mix<div className={lockedSlider == 'energyMix' ? 'lock-btn locked d-none d-md-inline-block' : 'lock-btn d-none d-md-inline-block'} onClick={() => setLockedSlider('energyMix')}></div></h1>
+                            </Col>
+                            <Col className="d-md-none">
+                                <Row className="g-0">
+                                    <Col>
+                                        <h2 className="slider-value bg-energymix">{energyMix}%</h2>
+                                    </Col>
+                                    <Col xs={4}>
+                                        <h3 className="slider-value-extra">2x</h3>
+                                    </Col>
+                                </Row>
+                            </Col>
+                            <Col xs="auto" className="d-none d-md-block">
+                                <div className="label">With fossil fuel mostly being </div>
+                                <div className="fossil-fuel-makeup"> 
+                                    <Form.Select onChange={event => changeFossilFuelMakeup(event.target.value)} size="sm">
+                                        <option value="453">Natural Gas</option>
+                                        <option value="1024">Coal</option>
+                                        <option value="1106" selected>Oil</option>
+                                    </Form.Select>
+                                </div>
+                            </Col>
+                        </Row>
+                    </div>
+
+                    <div className="fuel-select-row d-md-none">
+                        <Row>
+                            <Col>
+                                <div className="label">With fossil fuel mostly being </div>
+                            </Col>
+                            <Col xs="auto">
+                                <div className="fossil-fuel-makeup"> 
+                                    <Form.Select onChange={event => changeFossilFuelMakeup(event.target.value)} size="sm">
+                                        <option value="453">Natural Gas</option>
+                                        <option value="1024">Coal</option>
+                                        <option value="1106" selected>Oil</option>
+                                    </Form.Select>
+                                </div>
+                            </Col>
+                        </Row>
+                    </div>
+
+                    <div className="tooltip-row d-none d-md-block">
+                        <div class="slider-tooltip">
+                            Most optimistic estimate
+                        </div>
+                    </div>
+                    
+                    <div className="slider-row">
+                        <Row>
+                            <Col>
+                                <div className="slider-container">
+                                    <Slider
+                                        min={0}
+                                        startPoint={0}
+                                        marks={energyMixScale}
+                                        step={1}
+                                        onChange={changeEnergyMix}
+                                        value={energyMix}
+                                        disabled={lockedSlider == 'energyMix'}
+                                    />
+                                </div>
+                            </Col>
+                            <Col xs="auto">
+                                <div className={lockedSlider == 'energyMix' ? 'lock-btn locked d-md-none' : 'lock-btn d-md-none'} onClick={() => setLockedSlider('energyMix')}></div>
+                            </Col>
+                            <Col md={2} className="ps-3 d-none d-md-block">
+                                <h2 className="slider-value bg-energymix">{energyMix}%</h2>
+                                <h3 className="slider-value-extra">2x Current</h3>
+                            </Col>
+                        </Row>
+                    </div>
+
+                    <div className="tooltip-row d-md-none">
+                        <div class="slider-tooltip">
+                            Most optimistic estimate
+                        </div>
+                    </div>
+
+                    <div className="annotation-row">
+                        <Row>
+                            <Col className="d-flex align-items-center">
+                                <div className="annotation-wrapper">
+                                    {
+                                        annotations.energy_mix.map((item, index) => {
+                                            if (energyMix >= item.value_start && energyMix <= item.value_end) {
+                                                return (
+                                                    <Row className="annotation">
+                                                        <Col xs={12} md="auto">
+                                                            <h2 className="text-energymix">{item.title}</h2>
+                                                        </Col>
+                                                        <Col>
+                                                            <p>{item.text}</p>
+                                                        </Col>
+                                                    </Row>
+                                                )
+                                            }
+                                        })
+                                    }
+                                </div>
+                            </Col>
+                        </Row>
+                    </div>
+                </div>
+
+                {/***** EMISSIONS *****/}
+                
+                <div className="emissions slider-wrapper">
+                    
+                    <div className="title-row">
+                        <Row>
+                            <Col>
+                                <h1>CO<sub>2</sub> Emissions<div className={lockedSlider == 'emissions' ? 'lock-btn locked d-none d-md-inline-block' : 'lock-btn d-none d-md-inline-block'} onClick={() => setLockedSlider('emissions')}></div></h1>
+                            </Col>
+                            <Col className="d-none d-md-block">
+                                <div className="annotation-small">
+                                ((consumptionPerCapita*1.65)/100)*(100-energyMix) * (fossilFuelMakeup/1000000)
+                                </div>
+                            </Col>
+                            <Col className="d-md-none">
+                                <Row className="g-0">
+                                    <Col>
+                                        <h2 className="slider-value bg-emissions">{emissions.toLocaleString()} Gt</h2>
+                                    </Col>
+                                    <Col xs={4}>
+                                        <h3 className="slider-value-extra">2x</h3>
+                                    </Col>
+                                </Row>
+                            </Col>
+                        </Row>
+                    </div>
+
+                    <div className="tooltip-row d-none d-md-block">
+                        <div class="slider-tooltip">
+                            Most optimistic estimate
+                        </div>
+                    </div>
+
+                    <div className="slider-row">
+                        <Row>
+                            <Col>
+                                <div className="slider-container">
+                                    <Slider
+                                        min={0}
+                                        max={consumptionData[consumptionData.length - 1].consumption_per_capita_kwh * (1106/1000000)}
+                                        startPoint={0}
+                                        marks={emissionsScale}
+                                        step={0.1}
+                                        onChange={changeConsumption}
+                                        value={emissions}
+                                        disabled={lockedSlider == 'emissions'}
+                                    />
+                                </div>
+                            </Col>
+                            <Col xs="auto">
+                            <div className={lockedSlider == 'emissions' ? 'lock-btn locked d-md-none' : 'lock-btn d-md-none'} onClick={() => setLockedSlider('emissions')}></div>
+                            </Col>
+                            <Col md={2} className="ps-3 d-none d-md-block">
+                                <h2 className="slider-value bg-emissions">{emissions.toLocaleString()} Gt</h2>
+                                <h3 className="slider-value-extra">2x Current</h3>
+                            </Col>           
+                        </Row>
+                    </div>
+
+                    <div className="tooltip-row d-md-none">
+                        <div class="slider-tooltip">
+                            Most optimistic estimate
+                        </div>
+                    </div>
+
+                    <div className="annotation-row">
+                        <Row>
+                            <Col className="d-flex align-items-center">
+                                <div className="annotation-wrapper">
+                                    {
+                                        annotations.emissions.map((item, index) => {
+                                            if (emissionsPercent >= item.value_start && emissionsPercent <= item.value_end) {
+                                                return (
+                                                    <Row className="annotation">
+                                                        <Col xs={12} md="auto">
+                                                            <h2 className="text-emissions">{item.title}</h2>
+                                                        </Col>
+                                                        <Col>
+                                                            <p>{item.text}</p>
+                                                        </Col>
+                                                    </Row>
+                                                )
+                                            }
+                                        })
+                                    }
+                                </div>
+                            </Col>
+                        </Row>
+                    </div>
+
                 </div>
 
             </div>
 
-            {/***** ENERGY MIX *****/}
-            
-            <div className="energymix slider-wrapper">
-                <div className="title-row">
-                    <Row>
-                        <Col>
-                            <h1>Renewables <span className="d-none d-md-inline">in Energy </span>Mix<div className={lockedSlider == 'energyMix' ? 'lock-btn locked d-none d-md-inline-block' : 'lock-btn d-none d-md-inline-block'} onClick={() => setLockedSlider('energyMix')}></div></h1>
-                        </Col>
-                        <Col className="d-md-none">
-                            <Row className="g-0">
-                                <Col>
-                                    <h2 className="slider-value bg-energymix">{energyMix}%</h2>
-                                </Col>
-                                <Col xs={4}>
-                                    <h3 className="slider-value-extra">2x</h3>
-                                </Col>
-                            </Row>
-                        </Col>
-                        <Col xs="auto" className="d-none d-md-block">
-                            <div className="label">With fossil fuel mostly being </div>
-                            <div className="fossil-fuel-makeup"> 
-                                <Form.Select onChange={event => changeFossilFuelMakeup(event.target.value)} size="sm">
-                                    <option value="453">Natural Gas</option>
-                                    <option value="1024">Coal</option>
-                                    <option value="1106" selected>Oil</option>
-                                </Form.Select>
-                            </div>
-                        </Col>
-                    </Row>
-                </div>
-
-                <div className="fuel-select-row d-md-none">
-                    <Row>
-                        <Col>
-                            <div className="label">With fossil fuel mostly being </div>
-                        </Col>
-                        <Col xs="auto">
-                            <div className="fossil-fuel-makeup"> 
-                                <Form.Select onChange={event => changeFossilFuelMakeup(event.target.value)} size="sm">
-                                    <option value="453">Natural Gas</option>
-                                    <option value="1024">Coal</option>
-                                    <option value="1106" selected>Oil</option>
-                                </Form.Select>
-                            </div>
-                        </Col>
-                    </Row>
-                </div>
-
-                <div className="tooltip-row d-none d-md-block">
-                    <div class="slider-tooltip">
-                        Most optimistic estimate
-                    </div>
-                </div>
-                
-                <div className="slider-row">
-                    <Row>
-                        <Col>
-                            <div className="slider-container">
-                                <Slider
-                                    min={0}
-                                    startPoint={0}
-                                    marks={energyMixScale}
-                                    step={1}
-                                    onChange={changeEnergyMix}
-                                    value={energyMix}
-                                    disabled={lockedSlider == 'energyMix'}
-                                />
-                            </div>
-                        </Col>
-                        <Col xs="auto">
-                            <div className={lockedSlider == 'energyMix' ? 'lock-btn locked d-md-none' : 'lock-btn d-md-none'} onClick={() => setLockedSlider('energyMix')}></div>
-                        </Col>
-                        <Col md={2} className="ps-3 d-none d-md-block">
-                            <h2 className="slider-value bg-energymix">{energyMix}%</h2>
-                            <h3 className="slider-value-extra">2x Current</h3>
-                        </Col>
-                    </Row>
-                </div>
-
-                <div className="tooltip-row d-md-none">
-                    <div class="slider-tooltip">
-                        Most optimistic estimate
-                    </div>
-                </div>
-
-                <div className="annotation-row">
-                    <Row>
-                        <Col className="d-flex align-items-center">
-                            <div className="annotation-wrapper">
-                                {
-                                    annotations.energy_mix.map((item, index) => {
-                                        if (energyMix >= item.value_start && energyMix <= item.value_end) {
-                                            return (
-                                                <Row className="annotation">
-                                                    <Col xs={12} md="auto">
-                                                        <h2 className="text-energymix">{item.title}</h2>
-                                                    </Col>
-                                                    <Col>
-                                                        <p>{item.text}</p>
-                                                    </Col>
-                                                </Row>
-                                            )
-                                        }
-                                    })
-                                }
-                            </div>
-                        </Col>
-                    </Row>
-                </div>
-            </div>
-
-            {/***** EMISSIONS *****/}
-            
-            <div className="emissions slider-wrapper">
-                
-                <div className="title-row">
-                    <Row>
-                        <Col>
-                            <h1>CO<sub>2</sub> Emissions<div className={lockedSlider == 'emissions' ? 'lock-btn locked d-none d-md-inline-block' : 'lock-btn d-none d-md-inline-block'} onClick={() => setLockedSlider('emissions')}></div></h1>
-                        </Col>
-                        <Col className="d-none d-md-block">
-                            <div className="annotation-small">
-                            ((consumptionPerCapita*1.65)/100)*(100-energyMix) * (fossilFuelMakeup/1000000)
-                            </div>
-                        </Col>
-                        <Col className="d-md-none">
-                            <Row className="g-0">
-                                <Col>
-                                    <h2 className="slider-value bg-emissions">{emissions.toLocaleString()} Gt</h2>
-                                </Col>
-                                <Col xs={4}>
-                                    <h3 className="slider-value-extra">2x</h3>
-                                </Col>
-                            </Row>
-                        </Col>
-                    </Row>
-                </div>
-
-                <div className="tooltip-row d-none d-md-block">
-                    <div class="slider-tooltip">
-                        Most optimistic estimate
-                    </div>
-                </div>
-
-                <div className="slider-row">
-                    <Row>
-                        <Col>
-                            <div className="slider-container">
-                                <Slider
-                                    min={0}
-                                    max={consumptionData[consumptionData.length - 1].consumption_per_capita_kwh * (1106/1000000)}
-                                    startPoint={0}
-                                    marks={emissionsScale}
-                                    step={0.1}
-                                    onChange={changeConsumption}
-                                    value={emissions}
-                                    disabled={lockedSlider == 'emissions'}
-                                />
-                            </div>
-                        </Col>
-                        <Col xs="auto">
-                        <div className={lockedSlider == 'emissions' ? 'lock-btn locked d-md-none' : 'lock-btn d-md-none'} onClick={() => setLockedSlider('emissions')}></div>
-                        </Col>
-                        <Col md={2} className="ps-3 d-none d-md-block">
-                            <h2 className="slider-value bg-emissions">{emissions.toLocaleString()} Gt</h2>
-                            <h3 className="slider-value-extra">2x Current</h3>
-                        </Col>           
-                    </Row>
-                </div>
-
-                <div className="tooltip-row d-md-none">
-                    <div class="slider-tooltip">
-                        Most optimistic estimate
-                    </div>
-                </div>
-
-                <div className="annotation-row">
-                    <Row>
-                        <Col className="d-flex align-items-center">
-                            <div className="annotation-wrapper">
-                                {
-                                    annotations.emissions.map((item, index) => {
-                                        if (emissionsPercent >= item.value_start && emissionsPercent <= item.value_end) {
-                                            return (
-                                                <Row className="annotation">
-                                                    <Col xs={12} md="auto">
-                                                        <h2 className="text-emissions">{item.title}</h2>
-                                                    </Col>
-                                                    <Col>
-                                                        <p>{item.text}</p>
-                                                    </Col>
-                                                </Row>
-                                            )
-                                        }
-                                    })
-                                }
-                            </div>
-                        </Col>
-                    </Row>
-                </div>
-
-            </div>
-        </div>
+        </>
         
     );
 }
