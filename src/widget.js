@@ -109,6 +109,23 @@ export function Widget() {
 
     );
 
+    const [tooltips, setTooltips] = React.useState(
+        {
+            consumption: {
+                position: '0%',
+                text: ''
+            },
+            energyMix: {
+                position: '0%',
+                text: ''
+            },
+            emissions: {
+                position: '0%',
+                text: ''
+            }
+        }
+    );
+
     const theme = {
         consumption: '#74258b',
         energy_mix: '#228a44',
@@ -122,6 +139,7 @@ export function Widget() {
             let percentage = (item.energy_demand_2030 / consumptionData[consumptionData.length - 1].energy_demand_2030) * 100; 
             scale[percentage] = item.consumption_level;
             setConsumptionScale(scale);
+            console.log(consumptionData[consumptionData.length - 1].consumption_per_capita_kwh * (1106/1000000));
         });
     }, []);
 
@@ -135,6 +153,12 @@ export function Widget() {
         setEnergyMix(value);
     }
 
+    let changeEmissions = (value) => {
+        setEmissions(value);
+         let consumption = emissions / ((1.65/100)*(100-energyMix) * (fossilFuelMakeup/1000000));
+        setConsumptionPerCapita(consumption);
+    }
+
     let changeFossilFuelMakeup = (value) => {
         setFossilFuelMakeup(value);
     }
@@ -145,6 +169,8 @@ export function Widget() {
         setEmissionsPercent(co2/0.127);
 
     }, [consumptionPerCapita, energyMix, fossilFuelMakeup]);
+
+   
 
     return (
         
@@ -169,7 +195,9 @@ export function Widget() {
                     <div className="title-row">
                         <Row>
                             <Col>
-                                <h1>Energy Consumption<div className={lockedSlider == 'consumption' ? 'lock-btn locked d-none d-md-inline-block' : 'lock-btn d-none d-md-inline-block'} onClick={() => setLockedSlider('consumption')}></div></h1>
+                                <h1>Energy Consumption
+                                    {/* <div className={lockedSlider == 'consumption' ? 'lock-btn locked d-none d-md-inline-block' : 'lock-btn d-none d-md-inline-block'} onClick={() => setLockedSlider('consumption')}></div> */}
+                                </h1>
                             </Col>
                             <Col className="d-none d-md-block" md={6} lg={8}>
                                 <div className="annotation-small">
@@ -190,8 +218,8 @@ export function Widget() {
                     </div>
 
                     <div className="tooltip-row d-none d-md-block">
-                        <div class="slider-tooltip">
-                            Most optimistic estimate
+                        <div class="slider-tooltip" style={{left: tooltips.consumption.position}}>
+                            {tooltips.consumption.text}
                         </div>
                     </div>
 
@@ -210,9 +238,9 @@ export function Widget() {
                                     />
                                 </div>
                             </Col>
-                            <Col xs="auto">
+                            {/* <Col xs="auto">
                                 <div className={lockedSlider == 'consumption' ? 'lock-btn locked d-md-none' : 'lock-btn d-md-none'} onClick={() => setLockedSlider('consumption')}></div>
-                            </Col>
+                            </Col> */}
                             <Col md={2} className="ps-3 d-none d-md-block">
                                 <h2 className="slider-value bg-consumption">{consumptionPerCapita.toLocaleString()} kwh</h2>
                                 <h3 className="slider-value-extra">2x Current</h3>
@@ -221,8 +249,8 @@ export function Widget() {
                     </div>
 
                     <div className="tooltip-row d-md-none">
-                        <div class="slider-tooltip">
-                            Most optimistic estimate
+                        <div class="slider-tooltip" style={{left: tooltips.consumption.position}}>
+                            {tooltips.consumption.text}
                         </div>
                     </div>
                     
@@ -259,7 +287,9 @@ export function Widget() {
                     <div className="title-row">
                         <Row>
                             <Col>
-                                <h1>Renewables <span className="d-none d-md-inline">in Energy </span>Mix<div className={lockedSlider == 'energyMix' ? 'lock-btn locked d-none d-md-inline-block' : 'lock-btn d-none d-md-inline-block'} onClick={() => setLockedSlider('energyMix')}></div></h1>
+                                <h1>Renewables <span className="d-none d-md-inline">in Energy </span>Mix
+                                    {/* <div className={lockedSlider == 'energyMix' ? 'lock-btn locked d-none d-md-inline-block' : 'lock-btn d-none d-md-inline-block'} onClick={() => setLockedSlider('energyMix')}></div> */}
+                                </h1>
                             </Col>
                             <Col className="d-md-none">
                                 <Row className="g-0">
@@ -302,8 +332,8 @@ export function Widget() {
                     </div>
 
                     <div className="tooltip-row d-none d-md-block">
-                        <div class="slider-tooltip">
-                            Most optimistic estimate
+                        <div class="slider-tooltip" style={{left: tooltips.energyMix.position}}>
+                            {tooltips.energyMix.text}
                         </div>
                     </div>
                     
@@ -322,9 +352,9 @@ export function Widget() {
                                     />
                                 </div>
                             </Col>
-                            <Col xs="auto">
+                            {/* <Col xs="auto">
                                 <div className={lockedSlider == 'energyMix' ? 'lock-btn locked d-md-none' : 'lock-btn d-md-none'} onClick={() => setLockedSlider('energyMix')}></div>
-                            </Col>
+                            </Col> */}
                             <Col md={2} className="ps-3 d-none d-md-block">
                                 <h2 className="slider-value bg-energymix">{energyMix}%</h2>
                                 <h3 className="slider-value-extra">2x Current</h3>
@@ -333,8 +363,8 @@ export function Widget() {
                     </div>
 
                     <div className="tooltip-row d-md-none">
-                        <div class="slider-tooltip">
-                            Most optimistic estimate
+                        <div class="slider-tooltip" style={{left: tooltips.energyMix.position}}>
+                            {tooltips.energyMix.text}
                         </div>
                     </div>
 
@@ -371,7 +401,9 @@ export function Widget() {
                     <div className="title-row">
                         <Row>
                             <Col>
-                                <h1>CO<sub>2</sub> Emissions<div className={lockedSlider == 'emissions' ? 'lock-btn locked d-none d-md-inline-block' : 'lock-btn d-none d-md-inline-block'} onClick={() => setLockedSlider('emissions')}></div></h1>
+                                <h1>CO<sub>2</sub> Emissions
+                                    {/* <div className={lockedSlider == 'emissions' ? 'lock-btn locked d-none d-md-inline-block' : 'lock-btn d-none d-md-inline-block'} onClick={() => setLockedSlider('emissions')}></div> */}
+                                </h1>
                             </Col>
                             <Col className="d-none d-md-block">
                                 <div className="annotation-small">
@@ -392,8 +424,8 @@ export function Widget() {
                     </div>
 
                     <div className="tooltip-row d-none d-md-block">
-                        <div class="slider-tooltip">
-                            Most optimistic estimate
+                        <div class="slider-tooltip" style={{left: tooltips.emissions.position}}>
+                            {tooltips.emissions.text}
                         </div>
                     </div>
 
@@ -407,15 +439,15 @@ export function Widget() {
                                         startPoint={0}
                                         marks={emissionsScale}
                                         step={0.1}
-                                        onChange={changeConsumption}
+                                        onChange={changeEmissions}
                                         value={emissions}
                                         disabled={lockedSlider == 'emissions'}
                                     />
                                 </div>
                             </Col>
-                            <Col xs="auto">
-                            <div className={lockedSlider == 'emissions' ? 'lock-btn locked d-md-none' : 'lock-btn d-md-none'} onClick={() => setLockedSlider('emissions')}></div>
-                            </Col>
+                            {/* <Col xs="auto">
+                                <div className={lockedSlider == 'emissions' ? 'lock-btn locked d-md-none' : 'lock-btn d-md-none'} onClick={() => setLockedSlider('emissions')}></div>
+                            </Col> */}
                             <Col md={2} className="ps-3 d-none d-md-block">
                                 <h2 className="slider-value bg-emissions">{emissions.toLocaleString()} Gt</h2>
                                 <h3 className="slider-value-extra">2x Current</h3>
@@ -424,8 +456,8 @@ export function Widget() {
                     </div>
 
                     <div className="tooltip-row d-md-none">
-                        <div class="slider-tooltip">
-                            Most optimistic estimate
+                        <div class="slider-tooltip" style={{left: tooltips.emissions.position}}>
+                            {tooltips.emissions.text}
                         </div>
                     </div>
 

@@ -24,12 +24,14 @@
     width: 90rem;
     max-width: 90vw;
     height: 95vh;
-    min-height: 540px;
     background: #d9d9d9;
     border-radius: 26px;
     box-sizing: border-box;
     overflow: hidden;
-    margin: 2.5vh auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     padding: 10px 20px;
 }
 
@@ -115,7 +117,7 @@
     top: 30%;
     transform: translateY(-50%);
     font-family: 'Caveat', cursive;
-    font-size: 1em;
+    font-size: 12px;
     color: #767676;
     z-index: 9999;
 }
@@ -243,7 +245,7 @@
 .label {
     font-family: 'Tanker-Regular', sans-serif;
     color: #666;
-    font-size: 12px;
+    font-size: 10px;
     margin-top: 5px;
 }
 
@@ -255,7 +257,7 @@
         background-color: #cdcdcd;
         border: none;
         border-radius: 6px;
-        font-size: 12px;
+        font-size: 10px;
     }
 }
 
@@ -288,7 +290,7 @@
 
 
 h1 {
-    font-size: 16px;
+    font-size: 14px;
     transform: translateY(25%);
 }
 
@@ -334,6 +336,12 @@ h1 {
 }
 
 @media screen and (min-width: 768px) {
+
+    .widget {
+        min-height: 600px;
+        max-height: 600px;
+    
+    }
 
     h1 {
         font-size: 24px;
