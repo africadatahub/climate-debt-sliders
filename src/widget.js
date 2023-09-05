@@ -82,27 +82,53 @@ export function Widget() {
         {
             consumption: [
                 {
-                    value_start: 0,
-                    value_end: 100,
+                    value_start: 4,
+                    value_end: 5,
                     title: "Did you know?",
                     text: "African average consumption is 560 kwh per capita per year. This is the same as the US in 1950."
+                },
+                {
+                    value_start: 25.6,
+                    value_end: 26.6,
+                    title: "Did you know?",
+                    text: "World average consumption is 3265 kwh per capita per year. This is the same as the US in 1970."
+                },
+                {
+                    value_start: 60.99,
+                    value_end: 71,
+                    title: "Did you know?",
+                    text: "OECD average consumption is 7773 kwh per capita per year. This is the same as the US in 2000."
+                },
+                {
+                    value_start: 100,
+                    value_end: 101,
+                    title: "Did you know?",
+                    text: "US average consumption in 2018 was 12744 kwh per capita"
                 }
             ],
             energy_mix: [
                 {
-                    value_start: 0,
-                    value_end: 100,
+                    value_start: 20.6,
+                    value_end: 21.6,
                     title: "Did you know?",
-                    text: "African average consumption is 560 kwh per capita per year. This is the same as the US in 1950."
-                }
+                    text: "The current energy mix is 20.6% renewable, 79.4% fossil fuel."
+                },
+                {
+                    value_start: 33.7,
+                    value_end: 34.7,
+                    title: "Did you know?",
+                    text: "The 2030 projected energy mix is 33.7% renewable, 66.3% fossil fuel."
+                },
+                {
+                    value_start: 45.6,
+                    value_end: 55.6,
+                    title: "Did you know?",
+                    text: "This is out most hopeful estimate."
+                },
+
             ],
             emissions: [
-                {
-                    value_start: 0,
-                    value_end: 100,
-                    title: "Did you know?",
-                    text: "African average consumption is 560 kwh per capita per year. This is the same as the US in 1950."
-                }
+               
                 
             ]
         }
