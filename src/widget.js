@@ -207,6 +207,7 @@ export function Widget() {
                 <div className="intro-wrapper">
                     <div className="intro-content">
                         <h1>Energy Demand in Africa</h1>
+                        <p className="intro-text">These interactive sliders show how changing consumption affects emissions and what percentage of renewables are needed to offset these emissions.</p>
                     </div>
                     <div className="intro-btn" onClick={() => setShowIntro(false)}>Start</div>
                 </div>
@@ -235,7 +236,7 @@ export function Widget() {
                                         <h2 className="slider-value bg-consumption">{consumptionPerCapita.toLocaleString()} kwh</h2>
                                     </Col>
                                     <Col xs={4}>
-                                        <h3 className="slider-value-extra">2x</h3>
+                                        <h3 className="slider-value-extra">{(consumptionPerCapitaPercent/((560/12744)*100)).toLocaleString()}x</h3>
                                     </Col>
                                 </Row>
                             </Col>
@@ -268,7 +269,7 @@ export function Widget() {
                             </Col> */}
                             <Col md={2} className="ps-3 d-none d-md-block">
                                 <h2 className="slider-value bg-consumption">{consumptionPerCapita.toLocaleString()} kwh</h2>
-                                <h3 className="slider-value-extra">2x Current</h3>
+                                <h3 className="slider-value-extra">{(consumptionPerCapitaPercent/((560/12744)*100)).toLocaleString()}x Current</h3>
                             </Col>
                         </Row>
                     </div>
@@ -322,7 +323,7 @@ export function Widget() {
                                         <h2 className="slider-value bg-energymix">{energyMix}%</h2>
                                     </Col>
                                     <Col xs={4}>
-                                        <h3 className="slider-value-extra">2x</h3>
+                                        <h3 className="slider-value-extra">{(energyMix/20.6).toLocaleString()}x</h3>
                                     </Col>
                                 </Row>
                             </Col>
@@ -382,7 +383,7 @@ export function Widget() {
                             </Col> */}
                             <Col md={2} className="ps-3 d-none d-md-block">
                                 <h2 className="slider-value bg-energymix">{energyMix}%</h2>
-                                <h3 className="slider-value-extra">2x Current</h3>
+                                <h3 className="slider-value-extra">{(energyMix/20.6).toLocaleString()}x Current</h3>
                             </Col>
                         </Row>
                     </div>
@@ -475,7 +476,7 @@ export function Widget() {
                             </Col> */}
                             <Col md={2} className="ps-3 d-none d-md-block">
                                 <h2 className="slider-value bg-emissions">{emissions.toLocaleString()} Gt</h2>
-                                <h3 className="slider-value-extra">2x Current</h3>
+                                <h3 className="slider-value-extra">{(emissions/0.811).toLocaleString()}x Current</h3>
                             </Col>           
                         </Row>
                     </div>
