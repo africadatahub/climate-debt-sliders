@@ -68,8 +68,7 @@ export function Widget() {
     const [energyMix, setEnergyMix] = React.useState(20.6);
     const [emissions, setEmissions] = React.useState(560*20.6);
     const [emissionsScale, setEmissionsScale] = React.useState({
-        0: '0GT',
-        5: 'Current',
+        0: '0GT'
     });
     const [emissionsPercent, setEmissionsPercent] = React.useState(0);
 
