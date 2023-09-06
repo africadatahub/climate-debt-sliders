@@ -19,38 +19,50 @@ export function Widget() {
         {
             consumption_level: ' ',
             population_estimate_2030: 1.65,
+            population_estimate_2050: 2.1,
             consumption_per_capita_kwh: 0,
-            energy_demand_2030: 0
+            energy_demand_2030: 0,
+            energy_demand_2050: 0 
         },
         {
             consumption_level: 'Africa',
             population_estimate_2030: 1.65,
+            population_estimate_2050: 2.1,
             consumption_per_capita_kwh: 560,
-            energy_demand_2030: 924
+            energy_demand_2030: 560*1.65,
+            energy_demand_2050: 560*2.1
         },
         {
             consumption_level: 'World',
             population_estimate_2030: 1.65,
+            population_estimate_2050: 2.1,
             consumption_per_capita_kwh: 3265,
-            energy_demand_2030: 5387
+            energy_demand_2030: 3265*1.65,
+            energy_demand_2050: 3265*2.1
         },
         {
             consumption_level: 'OECD',
             population_estimate_2030: 1.65,
+            population_estimate_2050: 2.1,
             consumption_per_capita_kwh: 7773,
-            energy_demand_2030: 12826
+            energy_demand_2030: 7773*1.65,
+            energy_demand_2050: 7773*2.1
         },
         {
             consumption_level: 'EU',
             population_estimate_2030: 1.65,
+            population_estimate_2050: 2.1,
             consumption_per_capita_kwh: 9000,
-            energy_demand_2030: 14850
+            energy_demand_2030: 9000*1.65,
+            energy_demand_2050: 9000*2.1
         },
         {
             consumption_level: 'US',
             population_estimate_2030: 1.65,
+            population_estimate_2050: 2.1,
             consumption_per_capita_kwh: 12744,
-            energy_demand_2030: 21028
+            energy_demand_2030: 12744*1.65,
+            energy_demand_2050: 12744*2.1
         }
     ]);
     const [consumptionScale, setConsumptionScale] = React.useState({});
@@ -68,7 +80,8 @@ export function Widget() {
     const [energyMix, setEnergyMix] = React.useState(20.6);
     const [emissions, setEmissions] = React.useState(560*20.6);
     const [emissionsScale, setEmissionsScale] = React.useState({
-        0: '0'
+        0: '0',
+        3.489: 'Current'
     });
     const [emissionsPercent, setEmissionsPercent] = React.useState(0);
 
@@ -116,7 +129,7 @@ export function Widget() {
                     value_start: 33.7,
                     value_end: 100,
                     title: "Did you know?",
-                    text: "The 2030 projected energy mix is 33.7% renewable, 66.3% fossil fuel."
+                    text: "The 2050 projected energy mix is 33.7% renewable, 66.3% fossil fuel."
                 }
 
             ],
@@ -160,11 +173,11 @@ export function Widget() {
     useEffect(() => {
         let scale = {};
         consumptionData.forEach((item, index) => {
-            let percentage = (item.energy_demand_2030 / consumptionData[consumptionData.length - 1].energy_demand_2030) * 100; 
+            let percentage = (item.energy_demand_2050 / consumptionData[consumptionData.length - 1].energy_demand_2050) * 100; 
             scale[percentage] = item.consumption_level;
             setConsumptionScale(scale);
-            console.log(consumptionData[consumptionData.length - 1].consumption_per_capita_kwh * (1106/1000000));
         });
+
     }, []);
 
     let changeConsumption = (value) => {
@@ -179,7 +192,7 @@ export function Widget() {
 
     let changeEmissions = (value) => {
         setEmissions(value);
-         let consumption = emissions / ((1.65/100)*(100-energyMix) * (fossilFuelMakeup/1000000));
+         let consumption = emissions / ((2.1/100)*(100-energyMix) * (fossilFuelMakeup/1000000));
         setConsumptionPerCapita(consumption);
     }
 
@@ -188,9 +201,14 @@ export function Widget() {
     }
 
     useEffect(() => {
-        let co2 = ((consumptionPerCapita*1.65)/100)*(100-energyMix) * (fossilFuelMakeup/1000000);
+        let co2 = ((consumptionPerCapita*2.1)/100)*(100-energyMix) * (fossilFuelMakeup/1000000);
         setEmissions(co2);
-        setEmissionsPercent(co2/0.127);
+
+        let maxEmissions = 12744*2.1 * (1106/1000000);
+
+        let co2Percent = (co2/maxEmissions)*100;
+
+        setEmissionsPercent(co2Percent);
 
     }, [consumptionPerCapita, energyMix, fossilFuelMakeup]);
 
@@ -455,12 +473,11 @@ export function Widget() {
                                     <div className="slider-container">
                                         <Slider
                                             min={0}
-                                            max={consumptionData[consumptionData.length - 1].consumption_per_capita_kwh * (1106/1000000)}
                                             startPoint={0}
                                             marks={emissionsScale}
                                             step={0.1}
                                             onChange={changeEmissions}
-                                            value={emissions}
+                                            value={emissionsPercent}
                                             disabled={lockedSlider == 'emissions'}
                                         />
                                     </div>
