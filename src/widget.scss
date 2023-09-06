@@ -24,6 +24,8 @@
     width: 90rem;
     max-width: 90vw;
     height: 95vh;
+    max-height: 600px;
+    min-height: 550px;
     background: #F1F1F1;
     border-radius: 26px;
     box-sizing: border-box;
@@ -48,43 +50,35 @@
 .text-emissions { color: #ff7700; }
 .bg-emissions { background-color: #ff7700; }
       
-.intro-wrapper {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    width: 100%;
-    text-align: center;
+
+header {
+    height: 12%;
+
+    h1 {
+        font-size: 18px;
+
+        .subtitle {
+            font-size: 0.6em;
+            font-family: 'Satoshi-Regular';
+            text-transform: uppercase;
+            font-weight: 400;
+        }
+    }
 }
 
-.intro-text {
-    font-family: 'Satoshi-Regular';
-    font-size: 1.2em;
-    max-width: 400px;
-    margin: 2em auto;
+.sliders-wrapper {
+    height: 88%;
+    
+    
 }
-
-.intro-btn {
-    background-color: #74258b;
-    width: 100px;
-    display: inline-block;
-    font-size: 18px !important;
-    padding: 0.4em 0.5em;
-    color: #fff;
-    border-radius: 10px;
-    box-shadow: inset 0 -5px 0 rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-}
-
 
 .slider-wrapper {
     border-bottom: 2px solid #717171;
-    height: 30%;
-    // overflow-y: hidden;
+    height: 32%;
     padding-top: 7px;
 
     &.energymix {
-        height: 40%;
+        height: 36%;
     }
 
     &:last-child {
@@ -92,14 +86,13 @@
     }
 }
 
-.title-row { height: 22% !important; }
-.slider-row { height: 31% !important; }
-.tooltip-row { height: 19% !important; position: relative; }
-.annotation-row { height: 28% !important; }
+.title-row { height: 25% !important; }
+.slider-row { height: 42% !important; }
+.annotation-row { height: 33% !important; }
 
 .slider-container {
     position: relative;
-    top: 50%;
+    top: 110%;
     transform: translateY(-50%);
     padding-left: 2.5vw;
 }
@@ -121,21 +114,38 @@
 
 .slider-tooltip {
     position: absolute;
-    top: 30%;
+    top: -80%;
     transform: translateY(-50%);
-    font-family: 'Caveat', cursive;
     font-size: 12px;
     color: #767676;
     z-index: 9999;
+
+    svg {
+        width: 15px;
+        display: inline-block;
+        transform: scaleX(-1);
+        position: relative;
+        top: 10px
+    }
+
+    div {
+        display: inline-block;
+        font-family: 'Caveat', cursive;
+    }
+
 }
 
 .energymix {
 
-    .title-row { height: 20% !important; }
-    .fuel-select-row { height: 15% !important; }
-    .slider-row { height: 25% !important; }
-    .tooltip-row { height: 14% !important; position: relative; }
-    .annotation-row { height: 26% !important; }
+    .title-row { height: 19% !important; }
+    .fuel-select-row { height: 12% !important; }
+    .slider-row { height: 38% !important; }
+    .annotation-row { height: 31% !important; }
+
+    .slider-container {
+        top: 200%;
+    }
+
 
     .rc-slider-dot-active, .rc-slider-disabled .rc-slider-dot-active, 
     .rc-slider-handle, .rc-slider-disabled .rc-slider-handle,
@@ -258,13 +268,14 @@
 
 .fossil-fuel-makeup {
     margin-left: 1em;
-    display: inline-block !important;
+    
 
     select {
         background-color: #cdcdcd;
         border: none;
         border-radius: 6px;
         font-size: 10px;
+        padding: 2px 10px;
     }
 }
 
@@ -293,6 +304,12 @@
     font-size: 0.9em;
     color: rgba(0, 0, 0, 0.5);
     text-align: right;
+
+    a {
+        font-family: 'Satoshi-Regular';
+        color: rgba(255, 119, 0, 0.5);
+        text-decoration: none;
+    }
 }
 
 
@@ -342,12 +359,25 @@ h1 {
     }
 }
 
+// TABLET
+
 @media screen and (min-width: 768px) {
 
     .widget {
         min-height: 600px;
         max-height: 600px;
-    
+    }
+
+    header {
+
+        h1 {
+            font-size: 28px;
+
+            .subtitle {
+                font-size: 0.6em;
+            }
+        }
+
     }
 
     h1 {
@@ -403,20 +433,38 @@ h1 {
         height: 33.33%;
     }
 
-    .title-row { height: 22% !important; }
-    .slider-row { height: 31% !important; }
-    .tooltip-row { height: 15% !important; position: relative; }
-    .annotation-row { height: 32% !important; }
+    .title-row { height: 25% !important; }
+    .slider-row { height: 42% !important; }
+    .annotation-row { height: 33% !important; }
 
     .energymix {
-        .title-row { height: 22% !important; }
-        .slider-row { height: 31% !important; }
-        .tooltip-row { height: 15% !important; position: relative; }
-        .annotation-row { height: 32% !important; }
+        .title-row { height: 20% !important; }
+        .fuel-select-row { height: 12% !important; }
+        .slider-row { height: 50% !important; }
+        .annotation-row { height: 18% !important; }
+
+        .slider-container {
+            top: 100%;
+        }
+
+        .fossil-fuel-makeup {
+            display: inline-block;
+        }
+
+        .slider-tooltip {
+            top: -150%;
+        
+        }
+
+        .slider-value {
+            top: 60%;
+        }
+
     }
 
     .slider-value {
         left: 0;
+        
     }
 
     .slider-value-extra {
@@ -430,6 +478,7 @@ h1 {
 
     .label {
         display: inline-block;
+        font-size: 14px;
     }
 
     .slider-container {
@@ -444,14 +493,15 @@ h1 {
 
 }
 
+// DESKTOP
+
 @media screen and (min-width: 1024px) {
 
     .slider-container {
-        top: 20%;
+        top: 50%;
         transform: translateY(-50%);
         padding-left: 10px;
     }
-
 
     .annotation-small {
         font-size: 0.9em;
@@ -459,16 +509,21 @@ h1 {
         transform: translateY(50%);
     }
 
-    .title-row { height: 22% !important; }
-    .slider-row { height: 38% !important; }
-    .tooltip-row { height: 15% !important; position: relative; }
-    .annotation-row { height: 25% !important; }
+    
 
     .energymix {
-        .title-row { height: 22% !important; }
-        .slider-row { height: 38% !important; }
-        .tooltip-row { height: 15% !important; position: relative; }
-        .annotation-row { height: 25% !important; }
+        .title-row { height: 20% !important; }
+        .fuel-select-row { height: 12% !important; }
+        .slider-row { height: 50% !important; }
+        .annotation-row { height: 18% !important; }
+
+        .slider-container {
+            top: 70%;
+        }
+
+        .slider-value {
+            top: 10px;
+        }
     }
 
     .annotation-row {
@@ -492,7 +547,6 @@ h1 {
     }
 
     .slider-value {
-        margin-top: -10px;
         font-size: 20px !important;
     }
 
