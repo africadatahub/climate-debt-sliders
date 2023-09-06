@@ -25,7 +25,7 @@ export function Widget() {
             energy_demand_2050: 0 
         },
         {
-            consumption_level: 'Africa',
+            consumption_level: 'Africa AVG',
             population_estimate_2030: 1.65,
             population_estimate_2050: 2.1,
             consumption_per_capita_kwh: 560,
@@ -33,7 +33,7 @@ export function Widget() {
             energy_demand_2050: 560*2.1
         },
         {
-            consumption_level: 'World',
+            consumption_level: 'World AVG',
             population_estimate_2030: 1.65,
             population_estimate_2050: 2.1,
             consumption_per_capita_kwh: 3265,
@@ -41,7 +41,7 @@ export function Widget() {
             energy_demand_2050: 3265*2.1
         },
         {
-            consumption_level: 'OECD',
+            consumption_level: 'OECD AVG',
             population_estimate_2030: 1.65,
             population_estimate_2050: 2.1,
             consumption_per_capita_kwh: 7773,
@@ -49,7 +49,7 @@ export function Widget() {
             energy_demand_2050: 7773*2.1
         },
         {
-            consumption_level: 'EU',
+            consumption_level: 'EU AVG',
             population_estimate_2030: 1.65,
             population_estimate_2050: 2.1,
             consumption_per_capita_kwh: 9000,
@@ -57,7 +57,7 @@ export function Widget() {
             energy_demand_2050: 9000*2.1
         },
         {
-            consumption_level: 'US',
+            consumption_level: 'US AVG',
             population_estimate_2030: 1.65,
             population_estimate_2050: 2.1,
             consumption_per_capita_kwh: 12744,
@@ -251,7 +251,7 @@ export function Widget() {
                                 </Col>
                                 <Col className="d-none d-md-block" md={6} lg={8}>
                                     <div className="annotation-small">
-                                        Annual per capita value calculated based on a <a href="https://www.un.org/development/desa/pd/sites/www.un.org.development.desa.pd/files/wpp2022_summary_of_results.pdf" target="_blank">projected</a> 2050 population of 2.1bn in Africa
+                                        Annual per capita energy consumption value calculated based on a <a href="https://www.un.org/development/desa/pd/sites/www.un.org.development.desa.pd/files/wpp2022_summary_of_results.pdf" target="_blank">projected</a> 2050 population of 2.1bn in Africa
                                     </div>
                                 </Col>
                                 <Col className="d-md-none">
@@ -523,13 +523,13 @@ export function Widget() {
                                                 <h2 className="text-emissions">CURRENT GLOBAL EMISSIONS</h2>
                                             </Col>
                                             <Col xs="auto">
-                                                <p>36.8 GT</p>
+                                                <h2 className="emissions-value">36.8 GT</h2>
                                             </Col>
                                             <Col xs="auto">
                                                 <h2 className="text-emissions">GLOBAL TARGET BY 2050</h2>
                                             </Col>
                                             <Col xs="auto">
-                                                <p>0 GT</p>
+                                                <h2 className="emissions-value">0 GT</h2>
                                             </Col>
                                         </Row>
                                     </div>
