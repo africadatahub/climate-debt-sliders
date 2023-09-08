@@ -380,7 +380,7 @@ export function Widget() {
                                     <div className="label">With fossil fuel mostly being </div>
                                     <div className="fossil-fuel-makeup"> 
                                         <Form.Select onChange={event => changeFossilFuelMakeup(event.target.value)} size="sm">
-                                            <option value="453">Natural Gas</option>
+                                            <option value="439">Natural Gas</option>
                                             <option value="1024">Coal</option>
                                             <option value="1106" selected>Oil</option>
                                         </Form.Select>
@@ -397,7 +397,7 @@ export function Widget() {
                                 <Col xs="auto">
                                     <div className="fossil-fuel-makeup"> 
                                         <Form.Select onChange={event => changeFossilFuelMakeup(event.target.value)} size="sm">
-                                            <option value="453">Natural Gas</option>
+                                            <option value="439">Natural Gas</option>
                                             <option value="1024">Coal</option>
                                             <option value="1106" selected>Oil</option>
                                         </Form.Select>
