@@ -183,13 +183,31 @@ export function Widget() {
 
     let changeConsumption = (value) => {
         let cpc = Math.round(consumptionData[consumptionData.length - 1].consumption_per_capita_kwh * (value/100));
-        setConsumptionPerCapita(cpc);
-        setConsumptionPerCapitaPercent(value);
+
+        if(lockedSlider == 'emissions') {
+            let co2 = ((cpc*2.1)/100)*(100-energyMix)*(fossilFuelMakeup/1000000);
+            if(co2 < emissions) {
+                setConsumptionPerCapita(cpc);
+                setConsumptionPerCapitaPercent(value);
+            }
+        } else {
+            setConsumptionPerCapita(cpc);
+            setConsumptionPerCapitaPercent(value);
+        }
         setLastSlider('consumption');
+        
     }
 
     let changeEnergyMix = (value) => {
-        setEnergyMix(value);
+
+        if(lockedSlider == 'emissions') {
+            let co2 = ((consumptionPerCapita*2.1)/100)*(100-value)*(fossilFuelMakeup/1000000);
+            if(co2 < emissions) {
+                setEnergyMix(value);
+            }
+        } else {
+            setEnergyMix(value);
+        }
         setLastSlider('energyMix');
     }
 
@@ -205,29 +223,24 @@ export function Widget() {
 
     let updateEmissions = () => {
         let co2 = ((consumptionPerCapita*2.1)/100)*(100-energyMix)*(fossilFuelMakeup/1000000);
-
         setEmissions(co2);
-
         let maxEmissions = 12744*2.1 * (1106/1000000);
-
         let co2Percent = (co2/maxEmissions)*100;
-
         setEmissionsPercent(co2Percent);
     }
 
+    let toggleLockedSlider = () => {
+        if(lockedSlider == 'emissions') {
+            setLockedSlider('');
+        } else {
+            setLockedSlider('emissions');
+        }
+    }
+
+
     useEffect(() => {
         if(lastSlider != 'emissions') {
-
-            if(lockedSlider == 'emissions') {
-                if(lastSlider == 'consumption') {
-                    let energyMix = 100 - ((100*emissions*1000000)/(consumptionPerCapita/2.1/fossilFuelMakeup));
-                    setEnergyMix(energyMix);
-                } else {
-                    let consumption = (emissions*1000000*(100-energyMix))/(100*2.1*fossilFuelMakeup);
-                    setConsumptionPerCapita(consumption);
-                    setConsumptionPerCapitaPercent(consumption/consumptionData[consumptionData.length - 1].consumption_per_capita_kwh*100);
-                }
-            } else {
+            if(lockedSlider != 'emissions') {
                 updateEmissions();
             }
         }
@@ -282,9 +295,7 @@ export function Widget() {
                         <div className="title-row">
                             <Row>
                                 <Col>
-                                    <h1>Energy Consumption
-                                        {/* <div className={lockedSlider == 'consumption' ? 'lock-btn locked d-none d-md-inline-block' : 'lock-btn d-none d-md-inline-block'} onClick={() => setLockedSlider('consumption')}></div> */}
-                                    </h1>
+                                    <h1>Energy Consumption</h1>
                                 </Col>
                                 <Col className="d-none d-md-block" md={6} lg={8}>
                                     <div className="annotation-small">
@@ -296,9 +307,6 @@ export function Widget() {
                                         <Col>
                                             <h2 className="slider-value bg-consumption">{consumptionPerCapita.toLocaleString(undefined, {maximumFractionDigits: 2})} kwh</h2>
                                         </Col>
-                                        {/* <Col xs={4}>
-                                            <h3 className="slider-value-extra">{(consumptionPerCapitaPercent/((560/12744)*100)).toLocaleString(undefined, {maximumFractionDigits: 2})}x</h3>
-                                        </Col> */}
                                     </Row>
                                 </Col>
                             </Row>
@@ -319,12 +327,8 @@ export function Widget() {
                                         />
                                     </div>
                                 </Col>
-                                {/* <Col xs="auto">
-                                    <div className={lockedSlider == 'consumption' ? 'lock-btn locked d-md-none' : 'lock-btn d-md-none'} onClick={() => setLockedSlider('consumption')}></div>
-                                </Col> */}
                                 <Col md={2} className="ps-3 d-none d-md-block">
                                     <h2 className="slider-value bg-consumption">{consumptionPerCapita.toLocaleString(undefined, {maximumFractionDigits: 2})} kwh</h2>
-                                    {/* <h3 className="slider-value-extra">{(consumptionPerCapitaPercent/((560/12744)*100)).toLocaleString(undefined, {maximumFractionDigits: 2})}x Current</h3> */}
                                 </Col>
                             </Row>
                         </div>
@@ -362,18 +366,13 @@ export function Widget() {
                         <div className="title-row">
                             <Row>
                                 <Col>
-                                    <h1>Renewables <span className="d-none d-md-inline">in Energy </span>Mix
-                                        {/* <div className={lockedSlider == 'energyMix' ? 'lock-btn locked d-none d-md-inline-block' : 'lock-btn d-none d-md-inline-block'} onClick={() => setLockedSlider('energyMix')}></div> */}
-                                    </h1>
+                                    <h1>Renewables <span className="d-none d-md-inline">in Energy </span>Mix</h1>
                                 </Col>
                                 <Col className="d-md-none">
                                     <Row className="g-0">
                                         <Col>
                                             <h2 className="slider-value bg-energymix">{energyMix}%</h2>
                                         </Col>
-                                        {/* <Col xs={4}>
-                                            <h3 className="slider-value-extra">{(energyMix/20.6).toLocaleString(undefined, {maximumFractionDigits: 2})}x</h3>
-                                        </Col> */}
                                     </Row>
                                 </Col>
                                 <Col xs="auto" className="d-none d-md-block">
@@ -426,12 +425,8 @@ export function Widget() {
                                         />
                                     </div>
                                 </Col>
-                                {/* <Col xs="auto">
-                                    <div className={lockedSlider == 'energyMix' ? 'lock-btn locked d-md-none' : 'lock-btn d-md-none'} onClick={() => setLockedSlider('energyMix')}></div>
-                                </Col> */}
                                 <Col md={2} className="ps-3 d-none d-md-block">
                                     <h2 className="slider-value bg-energymix">{energyMix}%</h2>
-                                    {/* <h3 className="slider-value-extra">{(energyMix/20.6).toLocaleString(undefined, {maximumFractionDigits: 2})}x Current</h3> */}
                                 </Col>
                             </Row>
                         </div>
@@ -473,7 +468,7 @@ export function Widget() {
                             <Row>
                                 <Col>
                                     <h1>GHG Emissions
-                                        {/* <div className={lockedSlider == 'emissions' ? 'lock-btn locked d-none d-md-inline-block' : 'lock-btn d-none d-md-inline-block'} onClick={() => setLockedSlider('emissions')}></div> */}
+                                        <div className={lockedSlider == 'emissions' ? 'lock-btn locked' : 'lock-btn'} onClick={() => toggleLockedSlider()}></div>
                                     </h1>
                                 </Col>
                                 <Col className="d-none d-md-block">
@@ -486,9 +481,6 @@ export function Widget() {
                                         <Col>
                                             <h2 className="slider-value bg-emissions">{emissions.toLocaleString(undefined, {maximumFractionDigits: 2})} Gt</h2>
                                         </Col>
-                                        {/* <Col xs={4}>
-                                            <h3 className="slider-value-extra">2x</h3>
-                                        </Col> */}
                                     </Row>
                                 </Col>
                             </Row>
@@ -516,7 +508,6 @@ export function Widget() {
                                 </Col> */}
                                 <Col md={2} className="ps-3 d-none d-md-block">
                                     <h2 className="slider-value bg-emissions">{emissions.toLocaleString(undefined, {maximumFractionDigits: 2})} Gt</h2>
-                                    {/* <h3 className="slider-value-extra">Current African Emissions</h3> */}
                                 </Col>           
                             </Row>
                         </div>
@@ -527,22 +518,6 @@ export function Widget() {
                             <Row>
                                 <Col className="d-flex align-items-center">
                                     <div className="annotation-wrapper">
-                                        {/* {
-                                            annotations.emissions.map((item, index) => {
-                                                if (emissionsPercent >= item.value_start && emissionsPercent <= item.value_end) {
-                                                    return (
-                                                        <Row className="annotation">
-                                                            <Col xs={12} md="auto">
-                                                                <h2 className="text-emissions">{item.title}</h2>
-                                                            </Col>
-                                                            <Col>
-                                                                <p>{item.text}</p>
-                                                            </Col>
-                                                        </Row>
-                                                    )
-                                                }
-                                            })
-                                        } */}
                                         <Row className="annotation">
                                             <Col xs="auto">
                                                 <h2 className="text-emissions">CURRENT GLOBAL EMISSIONS</h2>
