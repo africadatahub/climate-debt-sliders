@@ -459,9 +459,9 @@ export function Widget() {
                                         }
                                     </div>
                                 </Col>
-                                <Col>
-                                <div className="annotation-small">
-                                    <strong>NOTE:</strong> GHG emissions are calculated on all fossil fuels being {(fossilFuelMakeup == 439 ? 'natural gas' : fossilFuelMakeup == 1024 ? 'coal' : 'oil')}
+                                <Col className="d-none d-md-block">
+                                <div className="energymix-annotation">
+                                    <strong>NOTE:</strong> GHG emissions are calculated on all fossil fuels being {(fossilFuelMakeup == 439 ? 'natural gas' : fossilFuelMakeup == 1024 ? 'coal' : 'oil')}.
                                 </div>
                                 </Col>
                             </Row>
@@ -561,9 +561,9 @@ export function Widget() {
                                             <Col xs="auto">
                                                 <h2 className="emissions-value">0 GT</h2>
                                             </Col>
-                                            <Col>
+                                            <Col className="d-none d-md-block">
                                                 <div className="end-credit text-end">
-                                                    Based on <a href="https://www.iea.org/news/global-co2-emissions-rose-less-than-initially-feared-in-2022-as-clean-energy-growth-offset-much-of-the-impact-of-greater-coal-and-oil-use" target="_blank">projections</a> by IEA
+                                                    Based on <a href="https://www.iea.org/news/global-co2-emissions-rose-less-than-initially-feared-in-2022-as-clean-energy-growth-offset-much-of-the-impact-of-greater-coal-and-oil-use" target="_blank">projections</a> by IEA. Projected energy mix is discussed <a href="https://www.nature.com/articles/s41560-020-00755-9" target="_blank">here</a>.
                                                 </div>                                      
                                             </Col>
                                         </Row>

@@ -305,7 +305,7 @@ header {
 
 }
 
-.annotation-small, .end-credit {
+.annotation-small, .end-credit, .energymix-annotation {
     font-family: 'Satoshi-Regular';
     font-size: 0.9em;
     color: rgba(0, 0, 0, 0.5);
@@ -316,10 +316,14 @@ header {
         color: rgba(255, 119, 0, 0.5);
         text-decoration: none;
     }
+
+    strong {
+        font-family: 'Satoshi-Regular';
+    }
 }
 
 .end-credit {
-    font-size: 1.4em;
+    font-size: 1.2em;
 }
 
 
@@ -552,6 +556,7 @@ h1 {
 
         p {
             font-size: 15px;
+            margin-top: 4px;
             line-height: 130%;
             display: block;
         }
@@ -645,12 +650,4 @@ h1 {
         max-width: 1200px !important;
     };
 
-    
-    
-
-
-}
-
-.title-row, .fuel-select-row, .slider-row, .tooltip-row, .annotation-row {
-    // outline: 1px solid orange;
 }
