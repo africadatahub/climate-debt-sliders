@@ -305,7 +305,7 @@ header {
 
 }
 
-.annotation-small {
+.annotation-small, .end-credit {
     font-family: 'Satoshi-Regular';
     font-size: 0.9em;
     color: rgba(0, 0, 0, 0.5);
@@ -316,6 +316,10 @@ header {
         color: rgba(255, 119, 0, 0.5);
         text-decoration: none;
     }
+}
+
+.end-credit {
+    font-size: 1.4em;
 }
 
 
@@ -434,6 +438,8 @@ h1 {
         font-size: 0.8em;
         line-height: 110%;
     }
+
+    
 
     .slider-wrapper, .slider-wrapper.energymix  {
         height: 33.33%;

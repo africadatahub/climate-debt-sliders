@@ -77,8 +77,8 @@ export function Widget() {
         75: '75',
         100: '100'
     });
-    const [energyMix, setEnergyMix] = React.useState(20.6);
-    const [emissions, setEmissions] = React.useState(((560*2.1)/100)*(100-20.6) * (1106/1000000));
+    const [energyMix, setEnergyMix] = React.useState(15);
+    const [emissions, setEmissions] = React.useState(((560*2.1)/100)*(100-15) * (1106/1000000));
     const [emissionsScale, setEmissionsScale] = React.useState({
         0: '0',
         3.489: 'Current'
@@ -130,7 +130,7 @@ export function Widget() {
                     value_start: 33.7,
                     value_end: 100,
                     title: "Did you know?",
-                    text: "The 2050 projected energy mix is 33.7% renewable, 66.3% fossil fuel."
+                    text: "2030 projected energy mix is 33.7% renewable, 66.3% fossil fuel."
                 }
 
             ],
@@ -155,7 +155,7 @@ export function Widget() {
             },
             energyMix: {
                 position: '45.6%',
-                text: 'Most hopeful estimate'
+                text: 'Most hopeful estimate for 2030'
             },
             emissions: {
                 position: '0%',
@@ -377,7 +377,7 @@ export function Widget() {
                                     </Row>
                                 </Col>
                                 <Col xs="auto" className="d-none d-md-block">
-                                    <div className="label">With fossil fuel mostly being </div>
+                                    <div className="label">With fossil fuels being </div>
                                     <div className="fossil-fuel-makeup"> 
                                         <Form.Select onChange={event => changeFossilFuelMakeup(event.target.value)} size="sm">
                                             <option value="439">Natural Gas</option>
@@ -392,7 +392,7 @@ export function Widget() {
                         <div className="fuel-select-row d-md-none">
                             <Row>
                                 <Col>
-                                    <div className="label">With fossil fuel mostly being </div>
+                                    <div className="label">With fossil fuels being </div>
                                 </Col>
                                 <Col xs="auto">
                                     <div className="fossil-fuel-makeup"> 
@@ -458,6 +458,11 @@ export function Widget() {
                                             })
                                         }
                                     </div>
+                                </Col>
+                                <Col>
+                                <div className="annotation-small">
+                                    <strong>NOTE:</strong> GHG emissions are calculated on all fossil fuels being {(fossilFuelMakeup == 439 ? 'natural gas' : fossilFuelMakeup == 1024 ? 'coal' : 'oil')}
+                                </div>
                                 </Col>
                             </Row>
                         </div>
@@ -555,6 +560,11 @@ export function Widget() {
                                             </Col>
                                             <Col xs="auto">
                                                 <h2 className="emissions-value">0 GT</h2>
+                                            </Col>
+                                            <Col>
+                                                <div className="end-credit text-end">
+                                                    Based on <a href="https://www.iea.org/news/global-co2-emissions-rose-less-than-initially-feared-in-2022-as-clean-energy-growth-offset-much-of-the-impact-of-greater-coal-and-oil-use" target="_blank">projections</a> by IEA
+                                                </div>                                      
                                             </Col>
                                         </Row>
                                     </div>
